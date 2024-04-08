@@ -37,15 +37,27 @@
         >
 
     <EditText
+        android:id="@+id/edit_Id"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="E-mail"
+        android:hint="  ID"
+        android:background="@drawable/edittext_box"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         />
 
     <EditText
+        android:id="@+id/edit_Password"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Password"
+        android:hint="  Password"
+        android:background="@drawable/edittext_box"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         />
 
     <android.widget.Button
@@ -80,16 +92,16 @@
         android:orientation="horizontal"
         android:weightSum="10"
         >
-    <android.widget.Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="5"
-        android:text="Find Password"
-        android:textSize="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        />
+<!--    <android.widget.Button-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_weight="5"-->
+<!--        android:text="Find Password"-->
+<!--        android:textSize="16dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        />-->
 
     <android.widget.Button
         android:id="@+id/btnSignUp"

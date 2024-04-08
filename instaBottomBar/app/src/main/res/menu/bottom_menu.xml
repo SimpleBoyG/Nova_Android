@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_airplane"
+        android:enabled="true"
+        android:icon="@drawable/baseline_airplanemode_active_24"
+        android:title="비행기"
+        />
+
+    <item
+        android:id="@+id/action_human"
+        android:enabled="true"
+        android:icon="@drawable/baseline_accessibility_new_24"
+        android:title="사람"
+        />
+
+    <item
+        android:id="@+id/action_airport"
+        android:enabled="true"
+        android:icon="@drawable/baseline_airport_shuttle_24"
+        android:title="버스"
+        />
+
+    <item
+        android:id="@+id/action_addphoto"
+        android:enabled="true"
+        android:icon="@drawable/baseline_add_to_photos_24"
+        android:title="사진추가"
+        />
+
+    <item
+        android:id="@+id/action_alram"
+        android:enabled="true"
+        android:icon="@drawable/baseline_alarm_24"
+        android:title="알람"
+        />
+</menu>
