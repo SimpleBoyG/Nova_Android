@@ -18,7 +18,7 @@ public class ArtMarketForm extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_art_market_form);
+        setContentView(R.layout.activity_booking_form);
 
         ImageButton btn_map = (ImageButton) findViewById(R.id.btn_ArtMarketForm_Map);
         Button btn_Cancel = (Button) findViewById(R.id.btn_ArtMarketForm_Cancel);
