@@ -20,12 +20,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class Daily extends AppCompatActivity {
+public class Daily extends AppCompatActivity implements onViewClickListener{
 
     private ArrayList<RecyclerViewData> arrayList;
     private DailyAdapter adapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
+    int recyclerPostion = 0;
+    boolean bModify = false;
 
     private ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -40,8 +42,8 @@ public class Daily extends AppCompatActivity {
                             String strContent = intent.getStringExtra("content");
                             Uri uri = intent.getData();
                             RecyclerViewData recyclerViewData = new RecyclerViewData(uri, strName, strContent);
-                            arrayList.add(recyclerViewData);
-                            String strTemp = Integer.toString(arrayList.size());
+                            arrayListCheck(arrayList,recyclerPostion,recyclerViewData);
+
                             // 리사이클러뷰 업데이트
                             adapter.notifyDataSetChanged();
                         }
@@ -49,6 +51,17 @@ public class Daily extends AppCompatActivity {
                 }
             }
     );
+
+    public void arrayListCheck(ArrayList<RecyclerViewData> arrayList, int position, RecyclerViewData recyclerViewData){
+        // 추가 되는 요소가 존재 하지 않으면 추가
+        if(bModify == false){
+            arrayList.add(recyclerViewData);
+        }else{
+            arrayList.remove(position);
+            arrayList.add(position,recyclerViewData);
+            bModify = false;
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +78,7 @@ public class Daily extends AppCompatActivity {
         arrayList = new ArrayList<>();
 
         // 리사이클러뷰에 mainAdapter 객체 지정
-        adapter = new DailyAdapter(arrayList,this);
+        adapter = new DailyAdapter(arrayList,this,this);
         recyclerView.setAdapter(adapter);
 
         // 애니메이션 버튼 클릭
@@ -113,4 +126,14 @@ public class Daily extends AppCompatActivity {
         Log.d("MyTag","OnDestroy");
     }
 
+    @Override
+    public void onUpdateBtnClick(DailyAdapter.CustomViewHolder holder, View view, int position) {
+        Log.d("MyTag","Holder" + holder);
+        Log.d("MyTag","View :"+ view);
+        Log.d("MyTag","position :"+position);
+        recyclerPostion = position;
+        bModify = true;
+        Intent intent = new Intent(Daily.this, DailyForm.class);
+        activityResultLauncher.launch(intent);
+    }
 }

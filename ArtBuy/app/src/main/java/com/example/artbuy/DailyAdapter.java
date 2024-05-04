@@ -1,6 +1,7 @@
 package com.example.artbuy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,9 +26,12 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.CustomViewHo
     ArrayList<RecyclerViewData> arrayList = new ArrayList<>();
     private Context context;
 
-    DailyAdapter(ArrayList<RecyclerViewData> list, Context context) {
+    private onViewClickListener listener;
+
+    DailyAdapter(ArrayList<RecyclerViewData> list, Context context, onViewClickListener listener) {
         arrayList = list ;
         this.context = context;
+        this.listener = listener;
     }
     @NonNull
     @Override
@@ -35,7 +39,7 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.CustomViewHo
         View View = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_daily_list_form, parent, false);
 
-        return new DailyAdapter.CustomViewHolder(View);
+        return new DailyAdapter.CustomViewHolder(View,listener);
     }
 
     @Override
@@ -51,8 +55,8 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.CustomViewHo
                 .override(200,200)
                 .into(holder.iv_profile);
 
-
-        // 태그 지정
+        // 태그 지정 -> 해당 목록의 인식표 부여
+        // 태그는 object 파라미터이기 때문에 어떤걸 사용해도 상관 x
         holder.itemView.setTag(position);
 
         // 아이템 View가 짧게 클릭 됐을 때 아이템명을 띄움
@@ -77,8 +81,7 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.CustomViewHo
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                     if (item.getItemId() == R.id.daily_update){
-
-
+                        listener.onUpdateBtnClick(holder,v,holder.getAdapterPosition());
                     }else{
                         remove(holder.getAdapterPosition());
                     }
@@ -116,7 +119,7 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.CustomViewHo
         protected TextView tv_name;
         protected TextView tv_content;
 
-        public CustomViewHolder(@NonNull View itemView) {
+        public CustomViewHolder(@NonNull View itemView, final onViewClickListener listener) {
             super(itemView);
             this.iv_profile = (ImageView) itemView.findViewById(R.id.iv_profile);
             this.tv_name = (TextView) itemView.findViewById(R.id.tv_name);
